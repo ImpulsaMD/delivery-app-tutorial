@@ -1,7 +1,6 @@
 # delivery-app-tutorial
 Repositorio de aplicación deliveryapp 
 
-
 al clonar el repositorio recuerden instalar las dependencias antes de ejecutar,
 "yarn add" la carpeta de node_modules no se carga al repositorio por lo que es muy pesada
 
@@ -16,6 +15,18 @@ const firebaseConfig = {
   messagingSenderId: "",
   appId: "",
 };
-
 export default firebaseConfig;
 
+Dependencias utilizadas
+
+expo install react-navigation react-native-gesture-handler react-native-reanimated react-native-screens
+
+yarn add react-navigation-stack
+
+yarn add react-navigation-tabs
+
+yarn add native-base
+
+expo install expo-font
+
+yarn add firebase
