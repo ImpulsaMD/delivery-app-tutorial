@@ -2,12 +2,13 @@ import React, { useReducer } from "react";
 import firebase from "../../firebase";
 import FirebaseContext from "./firebaseContext";
 import FirebaseReducer from "./firebaseReducer";
-import { GET_RESTAURANTES, GET_PLATOS } from "../../types";
+import { GET_RESTAURANTES, GET_PLATOS, POST_DETALLES } from "../../types";
 
 const FirebaseState = (props) => {
   const initialState = {
     restaurantes: [],
     platos: [],
+    detallesplato: {},
   };
 
   const [state, dispatch] = useReducer(FirebaseReducer, initialState);
@@ -52,15 +53,25 @@ const FirebaseState = (props) => {
     }
   };
 
+  //detalles de plato seleccionado
+  const postDetalles = (plato) => {
+    dispatch({
+      type: POST_DETALLES,
+      payload: plato,
+    });
+  };
+
   return (
     <FirebaseContext.Provider
       value={{
         //state
         restaurantes: state.restaurantes,
         platos: state.platos,
+        detallesplato: state.detallesplato,
         //funciones
         getRestaurant,
         getPlatos,
+        postDetalles,
       }}
     >
       {props.children}

@@ -6,6 +6,7 @@ import { createStackNavigator } from "react-navigation-stack";
 //views
 import Restaurant from "../views/Restaurant/Restaurant";
 import Details from "../views/Restaurant/Details";
+import Food from "../views/Restaurant/Food";
 
 const RestaurantScreen = createStackNavigator(
   {
@@ -13,6 +14,12 @@ const RestaurantScreen = createStackNavigator(
       screen: Restaurant,
       navigationOptions: {
         title: "Restaurantes",
+      },
+    },
+    Food: {
+      screen: Food,
+      navigationOptions: {
+        title: "Comida",
       },
     },
     Details: {

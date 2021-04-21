@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { View } from "react-native";
+import React, { useContext, useEffect } from "react";
+import { View, Image } from "react-native";
 import {
   Button,
   Text,
@@ -12,27 +12,20 @@ import {
 import FirebaseContext from "../../context/firebase/firebaseContext";
 
 export default ({ navigation }) => {
-  const { platos } = useContext(FirebaseContext);
+  const { detallesplato } = useContext(FirebaseContext);
+  const { nombre, categoria, descripcion, precio } = detallesplato;
+  useEffect(() => {}, []);
   return (
     <Container>
       <Content>
-        {platos ? (
-          <List>
-            {platos.map((p) => {
-              const { nombre, categoria, id } = p;
-              return (
-                <ListItem key={id}>
-                  <Body>
-                    <Text>{nombre}</Text>
-                    <Text note>{categoria}</Text>
-                  </Body>
-                </ListItem>
-              );
-            })}
-          </List>
-        ) : (
+        {detallesplato && (
           <View>
-            <Text>Cargando...</Text>
+            <Image style={{ height: 200 }} />
+            <Text>Detalles Plato</Text>
+            <Text>{nombre}</Text>
+            <Text>{descripcion}</Text>
+            <Text note>{categoria}</Text>
+            <Text>{precio}</Text>
           </View>
         )}
       </Content>

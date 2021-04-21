@@ -1,2 +1,3 @@
 export const GET_RESTAURANTES = "GET_RESTAURANTES";
 export const GET_PLATOS = "GET_PLATOS";
+export const POST_DETALLES = "POST_DETALLES";
