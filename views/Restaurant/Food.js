@@ -8,6 +8,7 @@ import {
   List,
   ListItem,
   Body,
+  Thumbnail,
 } from "native-base";
 import FirebaseContext from "../../context/firebase/firebaseContext";
 
@@ -19,7 +20,7 @@ export default ({ navigation }) => {
         {platos ? (
           <List>
             {platos.map((p) => {
-              const { nombre, categoria, id } = p;
+              const { nombre, categoria, imagen, id } = p;
               return (
                 <ListItem
                   key={id}
@@ -28,6 +29,7 @@ export default ({ navigation }) => {
                     navigation.navigate("Details");
                   }}
                 >
+                  <Thumbnail source={{ uri: imagen }} />
                   <Body>
                     <Text>{nombre}</Text>
                     <Text note>{categoria}</Text>

@@ -1,6 +1,15 @@
 import React, { useContext, useEffect } from "react";
 import { View } from "react-native";
-import { Button, Text, Content, Container, List, ListItem } from "native-base";
+import {
+  Button,
+  Text,
+  Content,
+  Container,
+  List,
+  ListItem,
+  Thumbnail,
+  Body,
+} from "native-base";
 import FirebaseContext from "../../context/firebase/firebaseContext";
 
 export default ({ navigation }) => {
@@ -19,7 +28,7 @@ export default ({ navigation }) => {
       <Content>
         <List>
           {restaurantes.map((r) => {
-            const { nombre, telefono, id } = r;
+            const { nombre, telefono, imagen, categoria, id } = r;
             return (
               <ListItem
                 key={id}
@@ -28,7 +37,12 @@ export default ({ navigation }) => {
                   navigation.navigate("Food");
                 }}
               >
-                <Text>{nombre}</Text>
+                <Thumbnail source={{ uri: imagen }} />
+                <Body>
+                  <Text>{nombre}</Text>
+                  <Text>Telefono: {telefono}</Text>
+                  <Text note>{categoria}</Text>
+                </Body>
               </ListItem>
             );
           })}
