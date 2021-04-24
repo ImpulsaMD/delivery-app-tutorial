@@ -13,7 +13,7 @@ import {
 import FirebaseContext from "../../context/firebase/firebaseContext";
 
 export default ({ navigation }) => {
-  const { restaurantes, getRestaurant, getPlatos } = useContext(
+  const { orden, restaurantes, getRestaurant, getPlatos } = useContext(
     FirebaseContext
   );
 
@@ -21,10 +21,12 @@ export default ({ navigation }) => {
     if (restaurantes.length == 0) {
       getRestaurant();
     }
+    console.log("aqui orden", orden);
   }, []);
 
   return (
     <Container>
+      <Text>{orden.length}</Text>
       <Content>
         <List>
           {restaurantes.map((r) => {
