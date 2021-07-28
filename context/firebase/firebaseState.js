@@ -7,6 +7,7 @@ import {
   GET_PLATOS,
   POST_DETALLES,
   POST_ORDEN,
+  DELETE_ORDEN
 } from "../../types";
 
 const FirebaseState = (props) => {
@@ -75,6 +76,15 @@ const FirebaseState = (props) => {
     });
   };
 
+
+  //eliminar plato de orden
+  const deleteOrden = indice => {
+    dispatch({
+      type: DELETE_ORDEN,
+      payload: indice
+    })
+  }
+
   return (
     <FirebaseContext.Provider
       value={{
@@ -88,6 +98,7 @@ const FirebaseState = (props) => {
         getPlatos,
         postDetalles,
         postOrden,
+        deleteOrden
       }}
     >
       {props.children}

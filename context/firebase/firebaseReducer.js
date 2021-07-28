@@ -3,6 +3,8 @@ import {
   GET_PLATOS,
   POST_DETALLES,
   POST_ORDEN,
+  DELETE_ORDEN
+
 } from "../../types";
 export default (state, action) => {
   switch (action.type) {
@@ -26,7 +28,13 @@ export default (state, action) => {
         ...state,
         orden: [...state.orden, action.payload],
       };
+    case DELETE_ORDEN:
+      return {
+        ...state,
+        orden: state.orden.filter((o, i) => i !== action.payload)
+      }
     default:
       return state;
   }
 };
+
