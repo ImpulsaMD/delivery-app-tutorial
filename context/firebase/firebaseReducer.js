@@ -3,7 +3,9 @@ import {
   GET_PLATOS,
   POST_DETALLES,
   POST_ORDEN,
-  DELETE_ORDEN
+  DELETE_ORDEN,
+  RESET_ORDEN,
+  GET_SUMMARY
 
 } from "../../types";
 export default (state, action) => {
@@ -32,6 +34,16 @@ export default (state, action) => {
       return {
         ...state,
         orden: state.orden.filter((o, i) => i !== action.payload)
+      }
+    case RESET_ORDEN:
+      return {
+        ...state,
+        orden: []
+      }
+    case GET_SUMMARY:
+      return {
+        ...state,
+        summary: action.payload
       }
     default:
       return state;

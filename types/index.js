@@ -3,3 +3,5 @@ export const GET_PLATOS = "GET_PLATOS";
 export const POST_DETALLES = "POST_DETALLES";
 export const POST_ORDEN = "POST_ORDEN";
 export const DELETE_ORDEN = 'DELETE_ORDEN'
+export const RESET_ORDEN = 'RESET_ORDEN'
+export const GET_SUMMARY = 'GET_SUMMARY'

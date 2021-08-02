@@ -18,7 +18,7 @@ const CartScreen = createStackNavigator(
     Summary: {
       screen: Summary,
       navigationOptions: {
-        title: "Resumen de Compra",
+        title: "Resumen de Compras",
       },
     },
   },

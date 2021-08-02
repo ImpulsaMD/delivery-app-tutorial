@@ -7,7 +7,10 @@ import {
   GET_PLATOS,
   POST_DETALLES,
   POST_ORDEN,
-  DELETE_ORDEN
+  DELETE_ORDEN,
+  RESET_ORDEN,
+  GET_SUMMARY
+
 } from "../../types";
 
 const FirebaseState = (props) => {
@@ -16,6 +19,8 @@ const FirebaseState = (props) => {
     platos: [],
     detallesplato: {},
     orden: [],
+    summary: []
+
   };
 
   const [state, dispatch] = useReducer(FirebaseReducer, initialState);
@@ -85,6 +90,39 @@ const FirebaseState = (props) => {
     })
   }
 
+  //guardar en db el pedido
+  const postOrdenDB = (orden, usuario) => {
+
+    firebase.db.collection('pedidos').add({ orden, usuario })
+
+    dispatch({
+      type: RESET_ORDEN
+    })
+  }
+
+  const getSummary = email => {
+    firebase.db
+      .collection("pedidos")
+      .where("usuario.email", "==", email)
+      .onSnapshot(manejarSnapshot);
+
+    function manejarSnapshot(snapshot) {
+      let summary = snapshot.docs.map((doc) => {
+        return {
+          id: doc.id,
+          ...doc.data(),
+        };
+      });
+
+      dispatch({
+        type: GET_SUMMARY,
+        payload: summary
+      })
+    }
+  }
+
+
+
   return (
     <FirebaseContext.Provider
       value={{
@@ -93,12 +131,15 @@ const FirebaseState = (props) => {
         platos: state.platos,
         detallesplato: state.detallesplato,
         orden: state.orden,
+        summary: state.summary,
         //funciones
         getRestaurant,
         getPlatos,
         postDetalles,
         postOrden,
-        deleteOrden
+        deleteOrden,
+        postOrdenDB,
+        getSummary
       }}
     >
       {props.children}

@@ -1,22 +1,36 @@
 import React, { useContext, useEffect } from "react";
 import { View, ScrollView } from "react-native";
-import { Button, Text, Container, Content, ListItem, List, Thumbnail, Body, Right } from "native-base";
+import { Button, Text, Container, Content, ListItem, List, Thumbnail, Body, Right, Footer, FooterTab } from "native-base";
 import FirebaseContext from "../../context/firebase/firebaseContext";
 
 
-export default () => {
-  const { orden, deleteOrden } = useContext(FirebaseContext)
+export default ({ navigation }) => {
+  const { orden, deleteOrden, postOrdenDB } = useContext(FirebaseContext)
   useEffect(() => {
     console.log('cambio en orden')
   }, [orden])
+
+  const ordenarPedido = () => {
+
+    const usuario = {
+      email: 'impulsamdprojects2@gmail.com',
+      firstName: 'Impulsa',
+      lastName: 'MD'
+    }
+
+    //pasar la orden y el usuario para que se guarde en la db
+    postOrdenDB(orden, usuario)
+  }
+
   return (
     <Container>
+      <Button onPress={() => navigation.navigate('Summary')} full info><Text>HISTORIAL</Text></Button>
       {
         orden.length !== 0 ?
           (
 
-            <Content>
-              <ScrollView>
+            <Content style={{ marginTop: 5 }}>
+              <ScrollView >
                 <List>
                   {
                     orden.map((o, i) => {
@@ -38,6 +52,7 @@ export default () => {
                   }
                 </List>
               </ScrollView>
+
             </Content>
           )
           :
@@ -48,6 +63,17 @@ export default () => {
             </View>
           )
       }
+      {
+        orden.length !== 0 &&
+        <Footer>
+          <FooterTab>
+            <Button onPress={() => ordenarPedido()} success full>
+              <Text style={{ color: '#ffff' }}>ORDENAR</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
+      }
+
     </Container>
   );
 };
